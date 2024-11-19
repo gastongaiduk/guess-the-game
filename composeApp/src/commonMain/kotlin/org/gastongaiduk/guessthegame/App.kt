@@ -11,9 +11,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import coil3.compose.AsyncImage
+import com.russhwolf.settings.Settings
 import org.gastongaiduk.guessthegame.infrastructure.IGBDRepository
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.gastongaiduk.guessthegame.model.Game
+
+const val MAX_SCORE_KEY = "maxScore"
+private val settings:Settings = Settings()
 
 @Composable
 @Preview
@@ -24,7 +28,7 @@ fun App() {
     )
 
     MaterialTheme {
-        var maxScore by remember { mutableStateOf(0) }
+        var maxScore = settings.getInt(MAX_SCORE_KEY, 0)
         var assertions by remember { mutableStateOf(0) }
         var gameToGuess by remember { mutableStateOf<List<Game>>(emptyList()) }
         var gamesToDistract by remember { mutableStateOf<List<Game>>(emptyList()) }
@@ -71,6 +75,7 @@ fun App() {
                                         assertions += 1
                                     } else {
                                         if (assertions > maxScore) {
+                                            settings.putInt(MAX_SCORE_KEY, assertions)
                                             maxScore = assertions
                                         }
                                         assertions = 0

@@ -16,7 +16,7 @@ compose-multiplatform = "1.7.0"
 junit = "4.13.2"
 kotlin = "2.0.21"
 ktor = "3.0.1"
-settings-multiplatform = "1.1.1"
+settings-multiplatform = "1.2.0"
 buildConfig = "5.3.5"
 
 [libraries]
