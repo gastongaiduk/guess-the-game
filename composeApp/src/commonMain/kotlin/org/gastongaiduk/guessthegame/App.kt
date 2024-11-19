@@ -1,7 +1,10 @@
 package org.gastongaiduk.guessthegame
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
@@ -10,6 +13,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.russhwolf.settings.Settings
 import org.gastongaiduk.guessthegame.infrastructure.IGBDRepository
@@ -34,7 +42,12 @@ fun App() {
         var gamesToDistract by remember { mutableStateOf<List<Game>>(emptyList()) }
         var allGames by remember { mutableStateOf<List<Game>>(emptyList()) }
         var clicked by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+
+        Column(
+            Modifier.fillMaxWidth().fillMaxHeight().background(Color.Black),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(Modifier.weight(0.3f))
             Row {
                 Button(onClick = {
                     clicked = false
@@ -54,11 +67,13 @@ fun App() {
                 }
             }
 
+            Spacer(Modifier.weight(1f))
+
             LazyColumn {
                 item {
                     if (allGames.size == 4) {
                         val game = gameToGuess.first()
-                        var choosen by remember { mutableStateOf(Any()) }
+                        var chosen by remember { mutableStateOf(Any()) }
                         if (!clicked){
                             AsyncImage(
                                 model = game.screenshots.random().url
@@ -68,10 +83,11 @@ fun App() {
                             )
 
                             allGames.sortedBy { it.id }.forEach {
+                                Spacer(Modifier.weight(0.1f))
                                 Button(onClick = {
                                     clicked = true
-                                    choosen = it
-                                    if (choosen == game){
+                                    chosen = it
+                                    if (chosen == game){
                                         assertions += 1
                                     } else {
                                         if (assertions > maxScore) {
@@ -80,18 +96,19 @@ fun App() {
                                         }
                                         assertions = 0
                                     }
-                                }) {
-                                    Text(it.name)
+                                }, Modifier.align(Alignment.CenterHorizontally)) {
+                                    Text(it.name, textAlign = TextAlign.Center)
                                 }
                             }
                         }
 
                         if (clicked) {
-                            if (choosen == game) {
-                                Text("Great! ${game.name} is the game of the screenshot")
+                            if (chosen == game) {
+                                Text("Correct!", fontWeight = FontWeight.Bold, color = Color.Green)
                             } else {
-                                Text("Bad! Correct anwser was: ${game.name}")
+                                Text("Incorrect!", fontWeight = FontWeight.Bold, color = Color.Red)
                             }
+                            Text(game.name, color = Color.White, fontStyle = FontStyle.Italic)
 
                             AsyncImage(
                                 model = game.cover?.url
@@ -104,14 +121,18 @@ fun App() {
                 }
             }
 
+
+            Spacer(Modifier.weight(1f))
             if (assertions > 0){
                 Row {
-                    Text("$assertions Assertions in a row!")
+                    Text("Assertions in a row: $assertions", color = Color.White)
                 }
             }
+
             Row {
-                Text("Max score: $maxScore")
+                Text("Max score: $maxScore", fontSize = 26.sp, fontWeight = FontWeight.Bold, color = Color.White)
             }
+            Spacer(Modifier.weight(0.3f))
         }
     }
 }
