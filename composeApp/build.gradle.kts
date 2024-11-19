@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -7,6 +8,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.gradleBuildConfig)
 }
 
 kotlin {
@@ -87,4 +89,16 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+}
+
+buildConfig {
+    packageName("org.gastongaiduk.guessthegame")
+
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").reader())
+    val clientId = properties.getProperty("igdb.client_id")
+    val clientSecret = properties.getProperty("igdb.client_secret")
+
+    buildConfigField("IGDB_CLIENT_ID", clientId)
+    buildConfigField("IGDB_CLIENT_SECRET", clientSecret)
 }

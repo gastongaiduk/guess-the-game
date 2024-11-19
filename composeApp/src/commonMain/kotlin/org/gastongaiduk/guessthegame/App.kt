@@ -11,20 +11,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import coil3.compose.AsyncImage
-import guessthegame.composeapp.generated.resources.Res
 import org.gastongaiduk.guessthegame.infrastructure.IGBDRepository
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.gastongaiduk.guessthegame.model.Game
-import org.jetbrains.compose.resources.stringResource
-import guessthegame.composeapp.generated.resources.client_id
-import guessthegame.composeapp.generated.resources.client_secret
 
 @Composable
 @Preview
 fun App() {
     val repository = IGBDRepository(
-        stringResource(Res.string.client_id),
-        stringResource(Res.string.client_secret)
+        BuildConfig.IGDB_CLIENT_ID,
+        BuildConfig.IGDB_CLIENT_SECRET
     )
 
     MaterialTheme {
