@@ -67,7 +67,7 @@ fun App() {
                 }
             }
 
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.weight(0.2f))
 
             LazyColumn {
                 item {
@@ -83,7 +83,7 @@ fun App() {
                             )
 
                             allGames.sortedBy { it.id }.forEach {
-                                Spacer(Modifier.weight(0.1f))
+                                Spacer(Modifier.weight(0.2f))
                                 Button(onClick = {
                                     clicked = true
                                     chosen = it
@@ -96,7 +96,7 @@ fun App() {
                                         }
                                         assertions = 0
                                     }
-                                }, Modifier.align(Alignment.CenterHorizontally)) {
+                                }, Modifier.align(Alignment.CenterHorizontally).fillMaxWidth()) {
                                     Text(it.name, textAlign = TextAlign.Center)
                                 }
                             }
