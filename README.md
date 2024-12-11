@@ -1,15 +1,23 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# Guess the game
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+Guess the game is a small Kotlin Multiplatform project created to practice and learn targeting the same logic to Android and iOS devices.
+The objective of the game is to guess as many games as you can in a row based in an in-game picture and four given options.
+The device will keep the max score you get.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## How to build
 
-* Before testing, set IGDB secrets in your `local.properties`
+Ensure you have all KMP dependencies installed, follow the [official guidelines](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html) if you haven't yet.
+Next step is to set the following secrets based in your [IGDB](https://api-docs.igdb.com/#getting-started) account right into the root of the project:
+
+```local.properties
   - igdb.client_id=`client id`
   - igdb.client_secret=`client secret`
+```
+
+You can use [Android Studio](https://developer.android.com/studio) to run the emulators locally.
+
+## Running screens
+![Home](public/home.png)
+![Guessing](public/guessing.png)
+![Correct](public/correct.png)
+![Incorrect](public/incorrect.png)
