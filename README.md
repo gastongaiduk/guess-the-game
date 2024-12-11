@@ -17,7 +17,7 @@ Next step is to set the following secrets based in your [IGDB](https://api-docs.
 You can use [Android Studio](https://developer.android.com/studio) to run the emulators locally.
 
 ## Running screens
-![Home](public/home.png)
-![Guessing](public/guessing.png)
-![Correct](public/correct.png)
-![Incorrect](public/incorrect.png)
+<img src="public/home.png" width="200"  alt="Home"/>
+<img src="public/guessing.png" width="200"  alt="Guessing"/>
+<img src="public/correct.png" width="200"  alt="Correct"/>
+<img src="public/incorrect.png" width="200"  alt="Incorrect"/>
