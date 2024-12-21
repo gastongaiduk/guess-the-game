@@ -7,11 +7,11 @@ The device will keep the max score you get.
 ## How to build
 
 Ensure you have all KMP dependencies installed, follow the [official guidelines](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html) if you haven't yet.
-Next step is to set the following secrets based in your [IGDB](https://api-docs.igdb.com/#getting-started) account right into the root of the project:
+Next step is to set the following secrets based in your [IGDB](https://api-docs.igdb.com/#getting-started) account into the a local.properties file right at the root of the project:
 
 ```local.properties
-  - igdb.client_id=`client id`
-  - igdb.client_secret=`client secret`
+  igdb.client_id=`client id`
+  igdb.client_secret=`client secret`
 ```
 
 You can use [Android Studio](https://developer.android.com/studio) to run the emulators locally.
